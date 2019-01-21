@@ -74,4 +74,11 @@ class LinkField(peewee.BlobField):
             return base64.b16decode(value.encode())
         except binascii.Error as e:
             return value
+        
+        pass
+
+class ForeignKey(LinkField, peewee.ForeignKeyField):
+
+    def __init__(self, *args, **kwargs):
+        peewee.ForeignKeyField.__init__(self, *args, **kwargs)
 

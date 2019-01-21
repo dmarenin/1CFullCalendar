@@ -1,12 +1,11 @@
 from datetime import datetime, date, timedelta
-from flask import render_template
+from flask import render_template, request
 
-from server import app, cache
-from server import models
-from flask import request
+from server import app, cache, models
 
 import json
 import decimal
+import peewee
 
 
 HEADERS = {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "POST", "Access-Control-Allow-Headers": "Content-Type"}
@@ -45,19 +44,19 @@ def get_tasks():
     end = datetime.strptime(end, "%Y-%m-%d") + timedelta(days=1)
 
     task = models.Task
+    employee = models.Employee
 
-    res = task.select(task.title, task.start, task.end, task.complete, task.employee, task.description)
+    res = task.select(task.title, task.start, task.end, task.complete, task.employee, task.description, employee.title.alias('empl_title')).join(employee, join_type=peewee.JOIN.LEFT_OUTER, on=(task.employee == employee.link))
         
     res = res.where(task.start >= start)
     res = res.where(task.end <= end)
     #res = res.where(task.employee == '9626D89D6773B96411E909BC417AB947')
     #res = res.where(task.complete == False)
 
-    #.where((task.start>=start) & (task.end<=end))
-
     list_res = list(res.dicts())
 
     for x in list_res:
+        x['description'] += f"""<BR> {x['empl_title']} </BR>"""
         x['url'] = 'http://google.com/'
         if x['complete'] == True:
             x['color'] = '#257e4a'

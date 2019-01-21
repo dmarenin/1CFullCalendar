@@ -11,6 +11,13 @@ class BaseModel(peewee.Model):
         
         primary_key = False
 
+class Employee(BaseModel):
+    title = peewee.CharField(db_column = 'Наименование')
+    link = LinkField(db_column = 'Ссылка')
+
+    class Meta:
+        db_table = 'r_Сотрудники'
+
 class Task(BaseModel):
     title = peewee.CharField(db_column = 'Наименование')
     description = peewee.CharField(db_column = 'Наименование')
@@ -18,7 +25,7 @@ class Task(BaseModel):
     end = DateField(db_column = 'ПлановаяДатаВыполнения')
     #end = peewee.DateTimeField(db_column = 'ПлановаяДатаВыполнения')
     complete = BoolField(db_column = 'Выполнена')
-    employee = LinkField(db_column = 'Сотрудник')
+    employee = ForeignKey(Employee, db_column='Сотрудник')
 
     #db = peewee.CharField(db_column = 'db')
     #source = CharField(db_column = 'source')
