@@ -15,3 +15,5 @@ server/server.sln
 server/obj/Debug/FlaskWebProject2.pyproj.CoreCompileInputs.cache
 server/obj/Debug/FlaskWebProject2.pyproj.FileListAbsolute.txt
 server/server/conf.py
+*.1CL
+*.cgr
