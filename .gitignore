@@ -6,3 +6,11 @@
 1c/1Cv8Log/1Cv8.lgd
 1c/1Cv8tmp.1CD.cfl
 1c/1Cv8tmp.1CL.cfl
+*.pyc
+server/.vs/server/v15/.suo
+server/.vs/FlaskWebProject2/v15/.suo
+*.pyproj
+server/server.pyproj.user
+server/server.sln
+server/obj/Debug/FlaskWebProject2.pyproj.CoreCompileInputs.cache
+server/obj/Debug/FlaskWebProject2.pyproj.FileListAbsolute.txt
